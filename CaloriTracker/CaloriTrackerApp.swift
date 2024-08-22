@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct CaloriTrackerApp: App {
-    let persistenceController = PersistenceController.shared
+    let persistenceController = DataController.shared
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            HomeView()
+                .environment(\.managedObjectContext, persistenceController.context)
+            //AddFoodView()
         }
     }
 }
