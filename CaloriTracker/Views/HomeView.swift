@@ -50,20 +50,22 @@ struct HomeView: View {
                         Text("Clear")
                             .foregroundColor(.red)
                             .font(.title2)
-                            .padding(10)
+                            .padding(15)
+                            .padding(.leading, 15)
+                            .padding(.trailing, 15)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.blue, lineWidth: 2)  // Border color and width
                             )
                     }
-                    .padding(.trailing, 15)
+                    .padding(.trailing, 100)
                     .alert(isPresented: $showAlert) {
                         Alert(
                             title: Text("Confirm Delete"),
                             message: Text("Are you sure you want to delete all items? This action cannot be undone."),
                                    primaryButton: .destructive(Text("Delete")) {
                                        // Perform the delete action
-                                       resetMacro()
+                                       vm.clearAll()
                                    },
                             secondaryButton: .cancel()
                         )
@@ -75,7 +77,9 @@ struct HomeView: View {
                     Text("Add")
                 }
                 .font(.title2)
-                .padding(10)
+                .padding(15)
+                .padding(.leading, 15)
+                .padding(.trailing, 15)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.blue, lineWidth: 2)  // Border color and width
@@ -86,17 +90,7 @@ struct HomeView: View {
             }
         }
     }
-    func resetMacro() {
-//        totalCalories = Int64(0)
-//        totalProtein = Int64(0)
-//        totalFat = Int64(0)
-//        totalCarbs = Int64(0)
-//        
-//        ForEach(vm.savedEntity) { fd in
-//            //vm.context.delete(fd)
-//        }
-//        vm.saveData()
-    }
+    
 }
 
 #Preview {

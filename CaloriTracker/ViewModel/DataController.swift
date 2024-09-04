@@ -42,6 +42,7 @@ class DataController: ObservableObject{
         
         do{
             savedEntity = try context.fetch(request)
+            sumFoodAttributes()
         } catch {
             print("Failed to fetch foods, \(error)")
         }
@@ -63,7 +64,6 @@ class DataController: ObservableObject{
             foodEntry.protein = protein16
         }
         saveData()
-        sumFoodAttributes()
     }
     
     func sumFoodAttributes() {
@@ -87,6 +87,12 @@ class DataController: ObservableObject{
         print("Total Carbs: \(totalCarbs)g")
     }
     
+    func clearAll() {
+        for food in savedEntity{
+            context.delete(food)
+        }
+        saveData()
+    }
     func saveData() {
         do {
             try context.save()
