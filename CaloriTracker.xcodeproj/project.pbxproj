@@ -81,7 +81,6 @@
 		F926E67B2C64064C00B24694 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F926E6812C640CB600B24694 /* DataController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -99,6 +98,7 @@
 		F926E67E2C64067800B24694 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F926E6812C640CB600B24694 /* DataController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

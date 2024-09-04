@@ -9,29 +9,27 @@ import SwiftUI
 import UIKit
 
 struct HomeView: View {
-    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var vm: DataController
     
     @State private var showAlert = false
-    @State var totalCalories = Int64(0)
-    @State var totalProtein = Int64(0)
-    @State var totalFat = Int64(0)
-    @State var totalCarbs = Int64(0)
-    
-    /* sortDescriptors is empty so no sorting, fetch the data into var
-       named foods with type Food */
-    @FetchRequest(sortDescriptors: []) var foods: FetchedResults<Food>
+//    @State var totalCalories = Int64(0)
+//    @State var totalProtein = Int64(0)
+//    @State var totalFat = Int64(0)
+//    @State var totalCarbs = Int64(0)
     
     @State private var showAddScreen = false
     
     var body: some View {
         NavigationView {
-            List(foods) { fd in
-                Section {
-                    Text(fd.name ?? "Unknow")
-                    Text("Calories: \(fd.cal)")
-                    Text("Carb: \(fd.carb)" )
-                    Text("Fat: \(fd.fat)")
-                    Text("Protein: \(fd.protein)")
+            List {
+                ForEach(vm.savedEntity) { fd in
+                    Section {
+                        Text(fd.name ?? "Unknow")
+                        Text("Calories: \(fd.cal)")
+                        Text("Carb: \(fd.carb)" )
+                        Text("Fat: \(fd.fat)")
+                        Text("Protein: \(fd.protein)")
+                    }
                 }
             }
             .navigationTitle("Todays Macro Count")
@@ -39,14 +37,13 @@ struct HomeView: View {
         VStack {
             VStack{
                 Section{
-                    Text("Calories: \(totalCalories) Carb: \(totalCarbs)g")
-                    Text("Fat: \(totalFat)g Protein: \(totalProtein)g")
+                    Text("Calories: \(vm.totalCalories) Carb: \(vm.totalCarbs)g")
+                    Text("Fat: \(vm.totalFat)g Protein: \(vm.totalProtein)g")
                 }
                 .font(.title2)
             }
             .padding()
             HStack {
-                
                   Button(role: .destructive) {
                         showAlert = true
                   } label: {
@@ -58,7 +55,6 @@ struct HomeView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.blue, lineWidth: 2)  // Border color and width
                             )
-
                     }
                     .padding(.trailing, 15)
                     .alert(isPresented: $showAlert) {
@@ -72,19 +68,6 @@ struct HomeView: View {
                             secondaryButton: .cancel()
                         )
                     }
-                
-                Button{
-                    sumFoodAttributes()
-                } label: {
-                    Text("Calculate")
-                }
-                .font(.title2)
-                .padding(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.blue, lineWidth: 2)  // Border color and width
-                )
-                .padding(.trailing, 10)
                 
                 Button{
                     showAddScreen.toggle()
@@ -103,44 +86,16 @@ struct HomeView: View {
             }
         }
     }
-    func sumFoodAttributes() {
-        totalCalories = Int64(0)
-        totalProtein = Int64(0)
-        totalFat = Int64(0)
-        totalCarbs = Int64(0)
-        // Loop through each Food entity and sum up the attributes
-        for food in foods {
-            // Ensure safe casting and retrieve the attribute values
-            totalCalories += food.cal
-            totalProtein += food.protein
-            totalFat += food.fat
-            totalCarbs += food.carb
-        }
-        
-        // Print or use the results
-        print("Total Calories: \(totalCalories)")
-        print("Total Protein: \(totalProtein)g")
-        print("Total Fat: \(totalFat)g")
-        print("Total Carbs: \(totalCarbs)g")
-    }
     func resetMacro() {
-        let persistenceController = DataController.shared
-        let context = persistenceController.context
-        
-        totalCalories = Int64(0)
-        totalProtein = Int64(0)
-        totalFat = Int64(0)
-        totalCarbs = Int64(0)
-        
-        for food in foods{
-            context.delete(food)
-        }
-        
-        do{
-            try context.save()
-        } catch {
-            print("Failed to delete entities")
-        }
+//        totalCalories = Int64(0)
+//        totalProtein = Int64(0)
+//        totalFat = Int64(0)
+//        totalCarbs = Int64(0)
+//        
+//        ForEach(vm.savedEntity) { fd in
+//            //vm.context.delete(fd)
+//        }
+//        vm.saveData()
     }
 }
 

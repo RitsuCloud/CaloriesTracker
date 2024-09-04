@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddFoodView: View {
-    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var vm: DataController
     @Environment(\.dismiss) var dismiss
     
     @State private var name = ""
@@ -16,8 +16,6 @@ struct AddFoodView: View {
     @State private var fat = ""
     @State private var carb = ""
     @State private var protein = ""
-    @State private var showAlert = false
-    @State private var alertMsg = ""
     
     var body: some View {
         VStack {
@@ -39,45 +37,10 @@ struct AddFoodView: View {
             .navigationTitle("Add Food")
             Spacer()
             Button("Add") {
-                let foodEntry = Food(context: moc)
-                foodEntry.name = name
-                if let cal16 = Int64(cal) {
-                    foodEntry.cal = cal16
-                } else {
-                    alertMsg += "Missing input for Calories! \n"
-                    showAlert = true
-                }
-                if let fat16 = Int64(fat) {
-                    foodEntry.fat = fat16
-                } else {
-                    alertMsg += "Missing input for Fat! \n"
-                    showAlert = true
-                }
-                if let carb16 = Int64(carb) {
-                    foodEntry.carb = carb16
-                } else {
-                    alertMsg += "Missing input for Carb! \n"
-                    showAlert = true
-                }
-                if let protein16 = Int64(protein) {
-                    foodEntry.protein = protein16
-                } else {
-                    alertMsg += "Missing input for Protein! \n"
-                    showAlert = true
-                }
-                if !showAlert {
-                    try? moc.save()
-                    dismiss()
-                }
+                vm.addFood(name: name, cal: cal, fat: fat, carb: carb, protein: protein)
+                dismiss()
             }
             .font(.title2)
-            .alert("Error", isPresented: $showAlert) {
-                Button("Ok", role: .cancel) {
-                    alertMsg = ""
-                }
-            } message: {
-                Text(alertMsg)
-            }
         }
     }
 }
