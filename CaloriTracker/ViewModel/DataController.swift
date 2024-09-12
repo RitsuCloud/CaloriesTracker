@@ -87,6 +87,13 @@ class DataController: ObservableObject{
         print("Total Carbs: \(totalCarbs)g")
     }
     
+    func deleteFood(indexSet: IndexSet) {
+        guard let index = indexSet.first else { return }
+        let entity = savedEntity[index]
+        context.delete(entity)
+        saveData()
+    }
+    
     func clearAll() {
         for food in savedEntity{
             context.delete(food)

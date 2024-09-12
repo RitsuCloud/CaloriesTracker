@@ -31,6 +31,7 @@ struct HomeView: View {
                         Text("Protein: \(fd.protein)")
                     }
                 }
+                .onDelete(perform: vm.deleteFood)
             }
             .navigationTitle("Todays Macro Count")
         }
