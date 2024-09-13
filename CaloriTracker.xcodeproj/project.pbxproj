@@ -15,6 +15,7 @@
 		F926E6802C64079400B24694 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F926E67F2C64079400B24694 /* HomeView.swift */; };
 		F926E6822C640CB600B24694 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F926E6812C640CB600B24694 /* DataController.swift */; };
 		F926E6842C642D4B00B24694 /* AddFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F926E6832C642D4B00B24694 /* AddFoodView.swift */; };
+		F9A0757C2C93DE9B00EC19D7 /* EditFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0757B2C93DE9B00EC19D7 /* EditFoodView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		F926E67F2C64079400B24694 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F926E6812C640CB600B24694 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		F926E6832C642D4B00B24694 /* AddFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodView.swift; sourceTree = "<group>"; };
+		F9A0757B2C93DE9B00EC19D7 /* EditFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				F926E66A2C62EE6400B24694 /* ContentView.swift */,
 				F926E67F2C64079400B24694 /* HomeView.swift */,
 				F926E6832C642D4B00B24694 /* AddFoodView.swift */,
+				F9A0757B2C93DE9B00EC19D7 /* EditFoodView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				F926E6842C642D4B00B24694 /* AddFoodView.swift in Sources */,
 				F926E66B2C62EE6400B24694 /* ContentView.swift in Sources */,
 				F926E6802C64079400B24694 /* HomeView.swift in Sources */,
+				F9A0757C2C93DE9B00EC19D7 /* EditFoodView.swift in Sources */,
 				F926E6692C62EE6400B24694 /* CaloriTrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,28 +12,35 @@ struct HomeView: View {
     @EnvironmentObject var vm: DataController
     
     @State private var showAlert = false
-//    @State var totalCalories = Int64(0)
-//    @State var totalProtein = Int64(0)
-//    @State var totalFat = Int64(0)
-//    @State var totalCarbs = Int64(0)
-    
+    @State private var selectedFood: FoodEntity?
     @State private var showAddScreen = false
+    @State private var showEditScreen = false
     
     var body: some View {
         NavigationView {
-            List {
+            List{
                 ForEach(vm.savedEntity) { fd in
-                    Section {
+                    Section{
                         Text(fd.name ?? "Unknow")
                         Text("Calories: \(fd.cal)")
                         Text("Carb: \(fd.carb)" )
                         Text("Fat: \(fd.fat)")
                         Text("Protein: \(fd.protein)")
                     }
+                    .onTapGesture {
+                        showEditScreen.toggle()
+                        selectedFood = fd
+                    }
                 }
                 .onDelete(perform: vm.deleteFood)
             }
             .navigationTitle("Todays Macro Count")
+            .sheet(isPresented: $showEditScreen) {
+                if let selectedFood = selectedFood {
+                    EditFoodView(curFood: selectedFood)
+                }
+            }
+            
         }
         VStack {
             VStack{

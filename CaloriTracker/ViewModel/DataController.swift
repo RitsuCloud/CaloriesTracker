@@ -87,6 +87,24 @@ class DataController: ObservableObject{
         print("Total Carbs: \(totalCarbs)g")
     }
     
+    func editFood(foodEntry: FoodEntity, name: String, cal: String,
+                  fat: String, carb: String, protein: String){
+        foodEntry.name = name
+        if let cal16 = Int64(cal) {
+            foodEntry.cal = cal16
+        }
+        if let fat16 = Int64(fat) {
+            foodEntry.fat = fat16
+        }
+        if let carb16 = Int64(carb) {
+            foodEntry.carb = carb16
+        }
+        if let protein16 = Int64(protein) {
+            foodEntry.protein = protein16
+        }
+        saveData()
+    }
+    
     func deleteFood(indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
         let entity = savedEntity[index]
